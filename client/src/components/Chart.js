@@ -34,6 +34,8 @@ import {
 
     if (data.length) {
 
+      LabelsDyn.length=0;
+      datasetsDyn.length=0;
  var dataAux = [];
   //var datasets
 
@@ -46,7 +48,7 @@ import {
 
 
   //CICLO QUE OBTIENE  labels
-  for (var j = 1; j < data.length; j++) {
+  for (var j = 0; j < data.length; j++) {
      LabelsDyn.push(data[j]["Zona"]);
   }
 
@@ -57,7 +59,7 @@ import {
     b = Math.floor(Math.random() * 255 + 1);
 
     if (Props[i] != "Zona") {
-      for (let j = 1; j < data.length; j++) {
+      for (let j = 0; j < data.length; j++) {
         dataAux.push(data[j][Props[i]]);
       }
 
@@ -92,6 +94,7 @@ import {
           data={{
             labels: LabelsDyn,
             datasets: datasetsDyn,
+            
           }}
         />
       </>
