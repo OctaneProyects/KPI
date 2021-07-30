@@ -226,8 +226,8 @@ export const Reports = () => {
     // getGastos();
     getZonas();
 
-    getSitios();
-    consultaMov();
+    // getSitios();
+    // consultaMov();
   }, []);
 
   //funcion para obtener arreglo con numeros de zonas para busqueda
@@ -314,16 +314,15 @@ export const Reports = () => {
   //funcion que consulta  la API para obtener zonas
   async function getZonas() {
     try {
-      const zonas = await axios.get(
-        "http://portal.grupoeco.com.mx/KPIApi/api/getzonas",
+      const zonas = await axios.post(
+        "/GetGastos",
         // "http://localhost:9000/api/getzonas",
 
         {
-          params: { Opc: 1 },
         }
       );
 
-      setZonas(JSON.parse(zonas.data));
+      alert(JSON.parse(zonas.data.data));
       // console.log(JSON.parse(zonas.data));
       return zonas;
     } catch (error) {

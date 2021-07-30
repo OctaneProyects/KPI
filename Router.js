@@ -1,27 +1,26 @@
 var Request = require("request");
-var url = 'http://localhost:8000/api'
+//var url = 'http://localhost:8000/api'
 //var url = 'https://portal.grupoeco.com.mx/sirexa/api/'
+var url = 'https://portal.grupoeco.com.mx/KPIApi/api/'
 // asdasd
 class Router {
 
     constructor(App) {
 
-        this.GetComisiones(App);
+        this.GetGastos(App);
 
     }
 
-    GetComisiones(App) {
+    GetGastos(App) {
 
-        App.post('/GetComisiones', (req, res) => {
+        App.post('/GetGastos', (req, res) => {
 
             try {
 
-                const u = req.session.User;
-
                 Request.get({
                     "headers": { "content-type": "application/json" },
-                    "url": `${url}/GetComisionByUsrKey?UsrKey=${u.Llave}`,
-                    body: JSON.stringify(u),
+                    "url": `${url}GetZonas?Opc=1`,
+                   // body: JSON.stringify(u),
                 }, (error, response, body) => {
 
                     if (error) {
