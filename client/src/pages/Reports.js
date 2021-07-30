@@ -226,8 +226,8 @@ export const Reports = () => {
     // getGastos();
     getZonas();
 
-    getSitios();
-    consultaMov();
+     getSitios();
+     consultaMov();
   }, []);
 
   //funcion para obtener arreglo con numeros de zonas para busqueda
@@ -265,22 +265,33 @@ export const Reports = () => {
 
   const consultaMov = async () => {
     try {
-      const { data } = await axios.get(
-        "http://portal.grupoeco.com.mx/KPIApi/api/GetVentas",
-        // "http://localhost:9000/api/GetVentas",
+
+      const { data } = await axios.post(
+        "/GetVentas",
+        // "http://localhost:9000/api/getzonas",
         {
-          params: {
-            Zonas: zonasSelect,
-            Sitios: sitiosSelect,
-            FechaI: "",
-            FechaF: "",
-            Opc: 1,
-          },
-        }
-      );
+          Zonas: [],
+          Sitios: [''],
+          FechaI: "",
+          FechaF: "",
+          Opc: 1,
+        });
+      // const { data } = await axios.get(
+      //   "http://portal.grupoeco.com.mx/KPIApi/api/GetVentas",
+      //   // "http://localhost:9000/api/GetVentas",
+      //   {
+      //     params: {
+      //       Zonas: zonasSelect,
+      //       Sitios: sitiosSelect,
+      //       FechaI: "",
+      //       FechaF: "",
+      //       Opc: 1,
+      //     },
+      //   }
+      // );
 
       if (data) {
-        setData(JSON.parse(data));
+        setData(JSON.parse(data.data));
         setloading(false);
         // chartConstructor(data);
       } else {
@@ -295,13 +306,20 @@ export const Reports = () => {
   //funcion que consulta  la API para obtener el datos de gastos
   async function getGastos() {
     try {
-      const dataGraph = await axios.get(
-        "http://portal.grupoeco.com.mx/KPIApi/api/getingresos",
-        // "http://localhost:9000/api/getingresos",
+      const zonas = await axios.post(
+        "/GetSitios",
+        // "http://localhost:9000/api/getzonas",
         {
-          params: { Opc: 1, IdCia: 1 },
         }
       );
+
+      // const dataGraph = await axios.get(
+      //   "http://portal.grupoeco.com.mx/KPIApi/api/getingresos",
+      //   // "http://localhost:9000/api/getingresos",
+      //   {
+      //     params: { Opc: 1, IdCia: 1 },
+      //   }
+      // );
 
       setDataGraph(dataGraph.data);
       return dataGraph;
@@ -314,16 +332,15 @@ export const Reports = () => {
   //funcion que consulta  la API para obtener zonas
   async function getZonas() {
     try {
-      const zonas = await axios.get(
-        "http://portal.grupoeco.com.mx/KPIApi/api/getzonas",
+      const zonas = await axios.post(
+        "/GetZonas",
         // "http://localhost:9000/api/getzonas",
 
         {
-          params: { Opc: 1 },
         }
       );
 
-      setZonas(JSON.parse(zonas.data));
+      setZonas(JSON.parse(zonas.data.data));
       // console.log(JSON.parse(zonas.data));
       return zonas;
     } catch (error) {
@@ -334,16 +351,23 @@ export const Reports = () => {
   //funcion que consulta  la API para obtener sitios
   async function getSitios() {
     try {
-      const sitios = await axios.get(
-        "http://portal.grupoeco.com.mx/KPIApi/api/getsitios",
+      const sitios = await axios.post(
+        "/GetSitios",
         // "http://localhost:9000/api/getzonas",
 
         {
-          params: { Opc: 1 },
         }
       );
+      // const sitios = await axios.get(
+      //   "http://portal.grupoeco.com.mx/KPIApi/api/getsitios",
+      //   // "http://localhost:9000/api/getzonas",
 
-      setSitios(JSON.parse(sitios.data));
+      //   {
+      //     params: { Opc: 1 },
+      //   }
+      // );
+
+      setSitios(JSON.parse(sitios.data.data));
       // console.log(JSON.parse(sitios.data));
       return sitios;
     } catch (error) {

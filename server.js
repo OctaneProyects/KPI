@@ -4,10 +4,13 @@ const path = require('path');
 const session = require('express-session');
 const Router = require('./Router')
 const dotenv = require('dotenv')
+var cors = require('cors')
 
 dotenv.config({path: './config/config.env'})
 
 const PORT = process.env.PORT || 5000;
+
+App.use(cors())
 
 App.use(express.static(path.join(__dirname, './client/build')));
 
