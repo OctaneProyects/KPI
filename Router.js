@@ -1,7 +1,7 @@
 var Request = require("request");
-var url = 'http://localhost:9000/api/'
+//ar url = 'http://localhost:9000/api/'
 //var url = 'https://portal.grupoeco.com.mx/sirexa/api/'
-// var url = 'https://portal.grupoeco.com.mx/KPIApi/api/'
+var url = 'https://portal.grupoeco.com.mx/KPIApi/api/'
 // asdasd
 class Router {
 
@@ -17,12 +17,15 @@ class Router {
 
         App.post('/GetZonas', (req, res) => {
 
+            const u = req.session.User;
+            console.log(u);
+
             try {
 
                 Request.get({
                     "headers": { "content-type": "application/json" },
                     "url": `${url}GetZonas?Opc=1`,
-                   // body: JSON.stringify(u),
+                    // body: JSON.stringify(u),
                 }, (error, response, body) => {
 
                     if (error) {
@@ -76,7 +79,7 @@ class Router {
                 Request.get({
                     "headers": { "content-type": "application/json" },
                     "url": `${url}GetSitios?Opc=1`,
-                   // body: JSON.stringify(u),
+                    // body: JSON.stringify(u),
                 }, (error, response, body) => {
 
                     if (error) {
@@ -135,7 +138,7 @@ class Router {
                 Request.get({
                     "headers": { "content-type": "application/json" },
                     "url": `${url}GetVentas?opc=${req.body.Opc}&Zonas=${req.body.Zonas}&Sitios=${req.body.Sitios}&FechaI=${req.body.FechaI}&FechaF=${req.body.FechaF}`,
-                   // body: JSON.stringify(u),
+                    // body: JSON.stringify(u),
                 }, (error, response, body) => {
 
                     if (error) {
