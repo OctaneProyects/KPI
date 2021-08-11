@@ -10,6 +10,8 @@ class Router {
         this.GetZonas(App);
         this.GetSitios(App);
         this.GetVentas(App);
+        this.GetGastos(App);
+
 
     }
 
@@ -182,6 +184,60 @@ class Router {
         });
 
     }
+    GetGastos(App) {
+
+        App.post('/GetGastos', (req, res) => {
+
+            try {
+
+                Request.get({
+                    "headers": { "content-type": "application/json" },
+                    "url": `${url}GetGastos`,
+                }, (error, response, body) => {
+
+                    if (error) {
+
+                        res.json({
+                            success: false,
+                            msg: error
+                        });
+
+                        return false;
+
+                    }
+
+                    if (body) {
+
+                        const apiRes = JSON.parse(body);
+
+                        res.json({
+                            success: true,
+                            data: apiRes
+                        });
+
+                    } else {
+
+                        res.json({
+                            success: false,
+                        });
+
+                    }
+
+                });
+
+            } catch (e) {
+
+                res.json({
+                    success: false,
+                    msg: e
+                });
+
+            }
+        });
+
+    }
+
+
 }
 
 module.exports = Router;
