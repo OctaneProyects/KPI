@@ -15,9 +15,10 @@ export const App = () => {
         let uId = params.get("uId");
 
         try {
-            
-            const zonas = await axios.get(`/setSession/${uId}`, {});
 
+            const user = await axios.get(`/setSession/${uId}`, {});
+           
+            localStorage.setItem('user', JSON.stringify(user.data) );
         } catch (error) {
             alert(error);
         }

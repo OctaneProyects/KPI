@@ -27,7 +27,7 @@ export const Navbar = () => {
           <Image src={OctaneLogo} size="mini" circular />
         </Menu.Item>
         <Link to="/" style={styles.navbarMargintop} >
-          <Menu.Item 
+          <Menu.Item
             name="home"
             component={Link}
             active={activeItem === "home"}
@@ -58,7 +58,13 @@ export const Navbar = () => {
             onClick={handleItemClick}
           ></Menu.Item>
         </Link>
+
+
+
         <Menu.Menu position="right">
+          <Menu.Item
+            name={JSON.parse(localStorage.getItem('user')).NombreCompleto}
+          />
           <Menu.Item
             name="logout"
             active={activeItem === "logout"}
@@ -68,7 +74,7 @@ export const Navbar = () => {
       </Menu>
       <Switch>
         <Route path="/" exact component={Home} />
-        <Route path="/Reports" component={Reports} />        
+        <Route path="/Reports" component={Reports} />
         <Route path="/Gastos" component={Gastos} />
         <Route path="/Profile" component={Profile} />
       </Switch>
@@ -76,7 +82,7 @@ export const Navbar = () => {
   );
 };
 const styles = {
-navbarMargintop:{
-  marginTop:10,
-}
+  navbarMargintop: {
+    marginTop: 10,
+  }
 }
